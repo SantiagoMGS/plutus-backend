@@ -1,0 +1,29 @@
+# ──────────────────────────────────────────────
+# Dependencias BASE — se instalan en TODOS los entornos
+# ──────────────────────────────────────────────
+
+# Framework
+Django==6.0.3
+djangorestframework==3.17.0
+
+# Autenticación JWT
+djangorestframework-simplejwt==5.5.1
+PyJWT==2.12.1
+
+# CORS (permite que el frontend en otro dominio llame a la API)
+django-cors-headers==4.9.0
+
+# Filtros avanzados para la API
+django-filter==25.2
+
+# Variables de entorno (.env)
+django-environ==0.13.0
+
+# PostgreSQL driver
+psycopg[binary]==3.3.3
+
+# Documentación OpenAPI auto-generada (Swagger UI)
+drf-spectacular==0.29.0
+
+# Servidor WSGI para producción
+gunicorn==23.0.0

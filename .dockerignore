@@ -1,0 +1,14 @@
+# ──────────────────────────────────────────────
+# .dockerignore — Archivos que Docker debe IGNORAR al copiar
+# ──────────────────────────────────────────────
+# Funciona igual que .gitignore pero para el contexto de build de Docker.
+# Excluir estos archivos hace el build más rápido y la imagen más liviana.
+
+.venv
+__pycache__
+*.pyc
+.env
+.git
+.gitignore
+*.md
+.vscode

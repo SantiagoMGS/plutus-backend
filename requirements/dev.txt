@@ -1,0 +1,9 @@
+# ──────────────────────────────────────────────
+# Dependencias de DESARROLLO — solo en tu máquina local
+# ──────────────────────────────────────────────
+
+# Primero instala las dependencias base
+-r base.txt
+
+# Herramientas de debug y desarrollo
+ipython==9.3.0

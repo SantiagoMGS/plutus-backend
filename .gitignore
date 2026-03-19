@@ -1,0 +1,28 @@
+# ──────────────────────────────────────────────
+# .gitignore — Archivos que Git debe ignorar
+# ──────────────────────────────────────────────
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual environment
+.venv/
+
+# Environment variables (contiene secretos)
+.env
+
+# Database
+db.sqlite3
+
+# Static files collected
+staticfiles/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
