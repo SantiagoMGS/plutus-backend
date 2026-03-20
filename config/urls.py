@@ -27,5 +27,6 @@ urlpatterns = [
     # ── URLs de las apps ──
     path("api/auth/", include("apps.users.urls")),
     path("api/", include("apps.accounts.urls")),
-    # ...
+    path("api/", include("apps.categories.urls")),
+    path("api/", include("apps.transactions.urls")),
 ]
