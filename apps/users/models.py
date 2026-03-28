@@ -46,6 +46,28 @@ class User(AbstractUser):
         help_text="Identificador único de Auth0 (claim 'sub' del JWT).",
     )
 
+    DOCUMENT_TYPE_CHOICES = [
+        ("CC", "Cédula de Ciudadanía"),
+        ("CE", "Cédula de Extranjería"),
+        ("NIT", "NIT"),
+        ("PP", "Pasaporte"),
+        ("TI", "Tarjeta de Identidad"),
+    ]
+
+    document_type = models.CharField(
+        max_length=3,
+        choices=DOCUMENT_TYPE_CHOICES,
+        null=True,
+        blank=True,
+        help_text="Tipo de documento de identidad.",
+    )
+    document_number = models.CharField(
+        max_length=20,
+        null=True,
+        blank=True,
+        help_text="Número de documento de identidad.",
+    )
+
     class Meta:
         # 📚 Meta es una clase interna que configura metadatos del modelo.
         # db_table = nombre de la tabla en la base de datos

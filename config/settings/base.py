@@ -167,6 +167,8 @@ REST_FRAMEWORK = {
 AUTH0_DOMAIN = env("AUTH0_DOMAIN")
 AUTH0_AUDIENCE = env("AUTH0_AUDIENCE")
 AUTH0_ISSUER = f"https://{AUTH0_DOMAIN}/"
+AUTH0_CLIENT_ID = env("AUTH0_CLIENT_ID", default="")
+AUTH0_CLIENT_SECRET = env("AUTH0_CLIENT_SECRET", default="")
 
 # ──────────────────────────────────────────────
 # CORS — Cross-Origin Resource Sharing

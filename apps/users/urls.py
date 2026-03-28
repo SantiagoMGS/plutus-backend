@@ -6,4 +6,5 @@ app_name = "users"
 
 urlpatterns = [
     path("me/", views.ProfileView.as_view(), name="profile"),
+    path("metadata/", views.DocumentMetadataView.as_view(), name="metadata"),
 ]
