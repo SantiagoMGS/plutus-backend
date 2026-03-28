@@ -9,7 +9,6 @@ Settings BASE — compartidos entre todos los entornos (dev, prod, staging).
 """
 
 import environ
-from datetime import timedelta
 from pathlib import Path
 
 # ──────────────────────────────────────────────
@@ -58,7 +57,6 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     "rest_framework",               # Django REST Framework — convierte Django en API REST
-    "rest_framework_simplejwt",     # Autenticación con JWT tokens
     "corsheaders",                  # Permite que Next.js (otro dominio) llame a nuestra API
     "django_filters",               # Filtros avanzados para querysets en la API
     "drf_spectacular",              # Auto-genera documentación OpenAPI (Swagger)
@@ -148,9 +146,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # - Cómo se paginan los resultados
 # - Qué backend genera la documentación
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ),
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "apps.users.auth0_backend.Auth0JWTAuthentication",
+    ],
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticated",
     ),
@@ -164,18 +162,11 @@ REST_FRAMEWORK = {
 }
 
 # ──────────────────────────────────────────────
-# JWT CONFIG (SimpleJWT)
+# AUTH0
 # ──────────────────────────────────────────────
-# 📚 SimpleJWT genera dos tokens:
-# - Access token: corta vida (30 min), se envía en cada request
-# - Refresh token: larga vida (7 días), se usa para obtener un nuevo access token
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
-    "ROTATE_REFRESH_TOKENS": True,       # Al refrescar, genera un nuevo refresh token también
-    "BLACKLIST_AFTER_ROTATION": True,     # El refresh token viejo queda invalidado
-    "AUTH_HEADER_TYPES": ("Bearer",),     # Header: Authorization: Bearer <token>
-}
+AUTH0_DOMAIN = env("AUTH0_DOMAIN")
+AUTH0_AUDIENCE = env("AUTH0_AUDIENCE")
+AUTH0_ISSUER = f"https://{AUTH0_DOMAIN}/"
 
 # ──────────────────────────────────────────────
 # CORS — Cross-Origin Resource Sharing

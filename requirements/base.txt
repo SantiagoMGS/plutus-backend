@@ -6,9 +6,9 @@
 Django==6.0.3
 djangorestframework==3.17.0
 
-# Autenticación JWT
-djangorestframework-simplejwt==5.5.1
-PyJWT==2.12.1
+# Autenticación JWT (Auth0 via JWKS)
+PyJWT[crypto]>=2.9
+requests>=2.32
 
 # CORS (permite que el frontend en otro dominio llame a la API)
 django-cors-headers==4.9.0

@@ -38,6 +38,13 @@ class User(AbstractUser):
         default="COP",
         help_text="Moneda por defecto del usuario (código ISO 4217: USD, EUR, COP, etc.)",
     )
+    auth0_sub = models.CharField(
+        max_length=128,
+        unique=True,
+        null=True,
+        blank=True,
+        help_text="Identificador único de Auth0 (claim 'sub' del JWT).",
+    )
 
     class Meta:
         # 📚 Meta es una clase interna que configura metadatos del modelo.
