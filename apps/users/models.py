@@ -38,12 +38,12 @@ class User(AbstractUser):
         default="COP",
         help_text="Moneda por defecto del usuario (código ISO 4217: USD, EUR, COP, etc.)",
     )
-    auth0_sub = models.CharField(
+    firebase_uid = models.CharField(
         max_length=128,
         unique=True,
         null=True,
         blank=True,
-        help_text="Identificador único de Auth0 (claim 'sub' del JWT).",
+        help_text="Identificador único de Firebase (UID del usuario).",
     )
 
     DOCUMENT_TYPE_CHOICES = [

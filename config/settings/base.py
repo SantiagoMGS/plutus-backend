@@ -147,7 +147,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # - Qué backend genera la documentación
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "apps.users.auth0_backend.Auth0JWTAuthentication",
+        "apps.users.firebase_backend.FirebaseAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticated",
@@ -162,13 +162,11 @@ REST_FRAMEWORK = {
 }
 
 # ──────────────────────────────────────────────
-# AUTH0
+# FIREBASE
 # ──────────────────────────────────────────────
-AUTH0_DOMAIN = env("AUTH0_DOMAIN")
-AUTH0_AUDIENCE = env("AUTH0_AUDIENCE")
-AUTH0_ISSUER = f"https://{AUTH0_DOMAIN}/"
-AUTH0_CLIENT_ID = env("AUTH0_CLIENT_ID", default="")
-AUTH0_CLIENT_SECRET = env("AUTH0_CLIENT_SECRET", default="")
+# Ruta al JSON de la service account de Firebase (opcional si se usa
+# GOOGLE_APPLICATION_CREDENTIALS como variable de entorno del sistema).
+FIREBASE_CREDENTIALS_PATH = env("FIREBASE_CREDENTIALS_PATH", default="")
 
 # ──────────────────────────────────────────────
 # CORS — Cross-Origin Resource Sharing

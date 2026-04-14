@@ -63,14 +63,14 @@ http://localhost:8000/api/docs/
 
 ## Comandos útiles
 
-| Comando | Descripción |
-|---|---|
-| `docker compose up -d` | Inicia la base de datos |
-| `docker compose down` | Detiene la base de datos |
-| `python manage.py runserver` | Inicia el servidor de desarrollo |
-| `python manage.py migrate` | Aplica migraciones pendientes |
-| `python manage.py makemigrations` | Genera migraciones tras cambios en modelos |
-| `python manage.py createsuperuser` | Crea un usuario administrador |
+| Comando                            | Descripción                                |
+| ---------------------------------- | ------------------------------------------ |
+| `docker compose up -d`             | Inicia la base de datos                    |
+| `docker compose down`              | Detiene la base de datos                   |
+| `python manage.py runserver`       | Inicia el servidor de desarrollo           |
+| `python manage.py migrate`         | Aplica migraciones pendientes              |
+| `python manage.py makemigrations`  | Genera migraciones tras cambios en modelos |
+| `python manage.py createsuperuser` | Crea un usuario administrador              |
 
 ## Estructura del proyecto
 

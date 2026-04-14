@@ -31,7 +31,7 @@ class ProfileView(APIView):
 
 class DocumentMetadataView(APIView):
     """
-    POST /api/auth/metadata/ → guardar tipo y número de documento en Auth0 user_metadata.
+    POST /api/auth/metadata/ → guardar tipo y número de documento.
     """
 
     permission_classes = [IsAuthenticated]

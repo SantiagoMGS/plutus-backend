@@ -6,9 +6,8 @@
 Django==6.0.3
 djangorestframework==3.17.0
 
-# Autenticación JWT (Auth0 via JWKS)
-PyJWT[crypto]>=2.9
-requests>=2.32
+# Autenticación (Firebase Admin SDK)
+firebase-admin>=6.0
 
 # CORS (permite que el frontend en otro dominio llame a la API)
 django-cors-headers==4.9.0

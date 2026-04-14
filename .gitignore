@@ -13,6 +13,9 @@ __pycache__/
 # Environment variables (contiene secretos)
 .env
 
+# Firebase service account key
+*-firebase-adminsdk-*.json
+
 # Database
 db.sqlite3
 
