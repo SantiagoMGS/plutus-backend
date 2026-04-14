@@ -36,13 +36,13 @@ RUN pip install --no-cache-dir -r requirements/base.txt
 # ── Copiar el código de la aplicación ──
 COPY . .
 
+# ── Hacer ejecutable el entrypoint ──
+RUN chmod +x entrypoint.sh
+
 # ── Puerto ──
 # Exponemos el puerto 8000 (informativo, el binding real se hace en docker-compose)
 EXPOSE 8000
 
 # ── Comando por defecto ──
-# Gunicorn es el servidor WSGI de producción (más robusto que el servidor de Django)
-# --bind 0.0.0.0:8000 = escucha en todas las interfaces, puerto 8000
-# --workers 2 = 2 procesos para manejar requests en paralelo
-# config.wsgi:application = punto de entrada de la app Django
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "2"]
+# El entrypoint ejecuta migraciones y luego arranca gunicorn
+CMD ["./entrypoint.sh"]
