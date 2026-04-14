@@ -1,3 +1,7 @@
+import json
+import os
+import tempfile
+
 import firebase_admin
 from firebase_admin import auth as firebase_auth, credentials
 from django.conf import settings
@@ -12,8 +16,11 @@ if not firebase_admin._apps:
     if hasattr(settings, "FIREBASE_CREDENTIALS_PATH") and settings.FIREBASE_CREDENTIALS_PATH:
         cred = credentials.Certificate(settings.FIREBASE_CREDENTIALS_PATH)
         firebase_admin.initialize_app(cred)
+    elif os.environ.get("FIREBASE_CREDENTIALS_JSON"):
+        cred_dict = json.loads(os.environ["FIREBASE_CREDENTIALS_JSON"])
+        cred = credentials.Certificate(cred_dict)
+        firebase_admin.initialize_app(cred)
     else:
-        # Uses GOOGLE_APPLICATION_CREDENTIALS env var or Application Default Credentials
         firebase_admin.initialize_app()
 
 
