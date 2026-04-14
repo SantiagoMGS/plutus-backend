@@ -1,3 +1,4 @@
+import base64
 import json
 import os
 import tempfile
@@ -16,10 +17,14 @@ if not firebase_admin._apps:
     if hasattr(settings, "FIREBASE_CREDENTIALS_PATH") and settings.FIREBASE_CREDENTIALS_PATH:
         cred = credentials.Certificate(settings.FIREBASE_CREDENTIALS_PATH)
         firebase_admin.initialize_app(cred)
+    elif os.environ.get("FIREBASE_CREDENTIALS_JSON_B64"):
+        raw = base64.b64decode(os.environ["FIREBASE_CREDENTIALS_JSON_B64"]).decode()
+        cred_dict = json.loads(raw)
+        cred = credentials.Certificate(cred_dict)
+        firebase_admin.initialize_app(cred)
     elif os.environ.get("FIREBASE_CREDENTIALS_JSON"):
         raw = os.environ["FIREBASE_CREDENTIALS_JSON"]
-        cred_dict = json.loads(raw)
-        # Dokploy may double-escape newlines in the private key
+        cred_dict = json.loads(raw, strict=False)
         if "private_key" in cred_dict:
             cred_dict["private_key"] = cred_dict["private_key"].replace("\\n", "\n")
         cred = credentials.Certificate(cred_dict)
