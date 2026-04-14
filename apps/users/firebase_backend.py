@@ -1,7 +1,5 @@
-import base64
 import json
 import os
-import tempfile
 
 import firebase_admin
 from firebase_admin import auth as firebase_auth, credentials
@@ -17,16 +15,17 @@ if not firebase_admin._apps:
     if hasattr(settings, "FIREBASE_CREDENTIALS_PATH") and settings.FIREBASE_CREDENTIALS_PATH:
         cred = credentials.Certificate(settings.FIREBASE_CREDENTIALS_PATH)
         firebase_admin.initialize_app(cred)
-    elif os.environ.get("FIREBASE_CREDENTIALS_JSON_B64"):
-        raw = base64.b64decode(os.environ["FIREBASE_CREDENTIALS_JSON_B64"]).decode()
-        cred_dict = json.loads(raw)
-        cred = credentials.Certificate(cred_dict)
-        firebase_admin.initialize_app(cred)
-    elif os.environ.get("FIREBASE_CREDENTIALS_JSON"):
-        raw = os.environ["FIREBASE_CREDENTIALS_JSON"]
-        cred_dict = json.loads(raw, strict=False)
-        if "private_key" in cred_dict:
-            cred_dict["private_key"] = cred_dict["private_key"].replace("\\n", "\n")
+    elif os.environ.get("FIREBASE_PROJECT_ID") and os.environ.get("FIREBASE_PRIVATE_KEY"):
+        cred_dict = {
+            "type": "service_account",
+            "project_id": os.environ["FIREBASE_PROJECT_ID"],
+            "private_key_id": os.environ.get("FIREBASE_PRIVATE_KEY_ID", ""),
+            "private_key": os.environ["FIREBASE_PRIVATE_KEY"].replace("\\n", "\n"),
+            "client_email": os.environ.get("FIREBASE_CLIENT_EMAIL", ""),
+            "client_id": os.environ.get("FIREBASE_CLIENT_ID", ""),
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+            "token_uri": "https://oauth2.googleapis.com/token",
+        }
         cred = credentials.Certificate(cred_dict)
         firebase_admin.initialize_app(cred)
     else:
