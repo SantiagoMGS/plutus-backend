@@ -17,7 +17,10 @@ if not firebase_admin._apps:
         cred = credentials.Certificate(settings.FIREBASE_CREDENTIALS_PATH)
         firebase_admin.initialize_app(cred)
     elif os.environ.get("FIREBASE_CREDENTIALS_JSON"):
-        cred_dict = json.loads(os.environ["FIREBASE_CREDENTIALS_JSON"])
+        raw = os.environ["FIREBASE_CREDENTIALS_JSON"]
+        # Dokploy may double-escape newlines in the private key
+        raw = raw.replace("\\n", "\n")
+        cred_dict = json.loads(raw)
         cred = credentials.Certificate(cred_dict)
         firebase_admin.initialize_app(cred)
     else:
